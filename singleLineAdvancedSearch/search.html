@@ -1,0 +1,42 @@
+<HTML>
+<HEAD>
+<TITLE> Advance Search </TITLE>
+<link rel="stylesheet" type="text/css" href="search.css">
+<link rel="stylesheet" href="jquery-ui.css">
+</HEAD>
+
+<BODY>
+	<div><h1>This project shows creating and advanced search panel with auto complete.</h1></div>
+	<div><h4> A single line search with prompts. You can search by name, emailid, term words. Operators are LIKE or =. Join operators are AND and OR. Focus in the input field and press spacebar. It will suggest you words. <br/>After each selection continue pressing spacebar.
+	<br>Suggestions will not appear after LIKE and = as you have to enter values. After you have entered values you can press spacebar to continue.</h4></div>
+
+	<div id="search-box" class="search-box">		
+		 <span class="search-field"><input type="text" id="query" size="100" ></span>
+		 <span class="search-btn"><input type="button" id="btnGo" value="Go" onclick="javascript:search()" /></span>
+	</div>
+	<div align="right">
+		<input type="button" id="advSearchButton" value="Advanced Search" onclick="javascript:toggleAdvSearch()"/>
+	</div>
+</BODY>
+
+</HTML>
+<script src="libs/jquery-1.7.1.js" type="text/javascript"></script>
+<script src="libs/jquery-ui-1.8.15.custom.js"></script>
+<script src="libs/underscore.js" type="text/javascript"></script>
+<script src="libs/backbone.js" type="text/javascript"></script>
+<script src="singleLineAdvSearch.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+	$('#query').singleLineSearch();
+
+	function toggleAdvSearch() {
+		$('#search-box').slideToggle("slow");
+	}
+
+	function search() {
+		console.log($('#query').val());
+	}
+
+	//toggleAdvSearch();
+	//toggleAdvSearch();	
+</script>

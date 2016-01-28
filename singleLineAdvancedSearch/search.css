@@ -1,0 +1,80 @@
+.search-box {
+	border: 1px solid;
+	border-radius: 15px;
+	min-height: 40px;	
+	background-color: #5176A2;
+    color: #FFFFFF;
+}
+
+.search-options-section {
+
+}
+
+.search-option {
+	display: inline-block;
+	padding: 10px;
+}
+
+.search-go-section {
+	text-align: right;
+}
+
+/***************************/
+.search-field {
+	width: 100%;
+	display: table-cell;
+	padding: 10px;
+}
+
+.search-btn {
+		display: table-cell;
+		padding: 10px;
+}
+
+.search-field > input {
+	width: 100%;
+}
+/*************************************************/
+/*span{
+	position: absolute;
+	right: 0;
+	width: 25px;
+	height: 25px;
+	line-height: 25px;
+	padding: 3px;
+	color: #FFF;
+	text-align: center;
+	background: #c06f59;
+}
+ 
+span:after{
+	content: "no"; /*if CSS are disbled span elements are not displayed*/
+}
+/* 
+input{
+	position: absolute;
+	right: 0;
+	margin: 0;
+	width: 31px;
+	height: 31px;
+	/*hide the radio button*/
+	/*filter:alpha(opacity=0);
+	-moz-opacity:0;
+	-khtml-opacity: 0;
+	opacity: 0;
+        cursor: pointer;
+}
+ 
+input[type="radio"] + span{ /*the span element that immediately follow the radio button */
+	/*visibility: hidden; /*temporarily hide the "YES" label*/
+	/*background: #6EB558;
+}
+ 
+input[type="radio"] + span:after{
+	content: "yes"; /*if CSS are disbled span elements are not displayed*/
+/*}
+ 
+ 
+input[type="radio"]:checked + span{
+	visibility: visible; /*show the "YES" label only if the radio button is checked*/
+/*}*/
