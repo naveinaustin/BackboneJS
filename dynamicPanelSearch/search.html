@@ -1,0 +1,28 @@
+<HTML>
+<HEAD>
+<TITLE> Advance Search </TITLE>
+<link rel="stylesheet" type="text/css" href="search.css">
+<link rel="stylesheet" href="jquery-ui.css">
+</HEAD>
+
+<BODY>
+	<div><h1>This project shows creating a dynamic panel with search components.</h1></div>
+	<div><h4>Click on Search button to reveal the search panel. This was created using a templating concept. Each section in the panel is a template (template directory). These are added by creating views from each template and dynamiclly added to the panel.</h4></div>
+	<div>Look into search.js for the implementation.</div>
+	<div align="right">
+		<input type="button" id="searchButton" value="Search"/>
+	</div>
+	<div id="search-box" class="search-box">
+		<!-- <div id="search-options" class="search-options-section">
+			<input type="button" value="Go" id="search-go" class="search-go-section"/>
+		</div> -->
+	</div>
+</BODY>
+
+</HTML>
+<script src="libs/jquery-1.7.1.js" type="text/javascript"></script>
+<script src="libs/jquery-ui-1.8.15.custom.js"></script>
+<script src="libs/underscore.js" type="text/javascript"></script>
+<script src="libs/backbone.js" type="text/javascript"></script>
+<script src="templates/template.js" type="text/javascript"></script>
+<script src="search.js" type="text/javascript"></script>
