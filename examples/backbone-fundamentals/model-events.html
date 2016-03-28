@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Sample</title>
+    <!--<link rel="stylesheet" href="style.css">-->
+    <script type="text/javascript" src="libs/jquery-1.7.1.js"></script>
+    <script type="text/javascript" src="libs/underscore.js"></script>
+    <script type="text/javascript" src="libs/backbone.js"></script>
+    <style type="text/css">
+    	
+    </style>
+  </head>
+  <body>
+  
+  </body>
+  <script type="text/javascript">
+    //Create a model with a validation of colors
+    var Vehicle = Backbone.Model.extend({
+      validate: function(attrs) {
+        var validColors = ['white','red','blue'];
+        var colorIsValid = function(attrs) {
+          if(!attrs.color) { 
+            return true;
+          }
+          return _(validColors).include(attrs.color);
+        }
+
+        if(!colorIsValid(attrs)) {
+          return 'Colors must be ' + validColors.join(', ');
+        }
+      }
+    });
+
+    var ford = new Vehicle({
+      type: 'car',
+      color: 'red'
+    });
+
+    console.log(ford.toJSON());
+
+    //Registering events for model change, change in color and validations
+    ford.on('change', function() {
+      console.log('Attribute changed');
+    });
+
+    ford.on('change:color', function() {
+      console.log('Color changed');
+    });
+
+    ford.on('invalid', function(model, error) {
+      console.log(error);
+    });
+
+    
+    ford.set('type', 'truck');
+    ford.set('color', 'blue');
+    //Set color and validate the content
+    ford.set({'color': 'pink'}, {validate: true});
+
+    ford.on('start', function() {
+      console.log('Start engine.');
+    });
+
+    ford.trigger('start');
+
+    var volcano = _.extend({}, Backbone.Events);
+
+    volcano.on('disaster:eruption', function(data) {
+      console.log('duck and cover');
+      if(data) {
+        console.log('data ' + data.plan);  
+      }
+    });
+
+    //Trigger a custom event
+    volcano.trigger('disaster:eruption');
+    volcano.trigger('disaster:eruption', {plan: 'run'});
+
+    volcano.off('disaster:eruption');
+
+    console.log('Firing when off.');
+    volcano.trigger('disaster:eruption');
+  </script>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Sample</title>
+    <!--<link rel="stylesheet" href="style.css">-->
+    <script type="text/javascript" src="libs/jquery-1.7.1.js"></script>
+    <script type="text/javascript" src="libs/underscore.js"></script>
+    <script type="text/javascript" src="libs/backbone.js"></script>
+    <style type="text/css">
+    	
+    </style>
+  </head>
+  <body>
+  
+  </body>
+  <script type="text/javascript">
+  //Create a base model with default attributes and a function
+  var Base = Backbone.Model.extend({
+  	initialize: function() {
+  		console.log("Initialize Base");
+  	},
+  	
+  	toString: function() {
+  		return JSON.stringify(this.toJSON());
+  	},
+
+    defaults: {
+      default: '1234'
+    }
+  });
+  
+  var base = new Base({
+  	one: 1,
+  	two: 'two'
+  });
+  
+  console.log(base.toString());
+
+  //Deriving from the Base
+  var Derived = Base.extend();
+
+  var derived = new Derived({
+    three: '3'
+  });
+  console.log(derived.toString());
+
+  //Checking instances of the objects created.
+  console.log('derived instanceof Derived: ' + (derived instanceof Derived));
+  console.log('derived instanceof Base: ' + (derived instanceof Base));
+  console.log('base instanceof derived: ' + (base instanceof Derived));
+  </script>
+</html>
