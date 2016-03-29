@@ -11,3 +11,4 @@ Some examples are:
 - Events in models
 - Events in views
 - View changes due to model change 
+- Route example
