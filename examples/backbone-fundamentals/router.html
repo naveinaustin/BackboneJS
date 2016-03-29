@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Sample</title>
+    <!--<link rel="stylesheet" href="style.css">-->
+    <script type="text/javascript" src="libs/jquery-1.7.1.js"></script>
+    <script type="text/javascript" src="libs/underscore.js"></script>
+    <script type="text/javascript" src="libs/backbone.js"></script>
+    <style type="text/css">
+    	
+    </style>
+  </head>
+  <body>
+  
+  </body>
+  <script type="text/javascript">
+    var documents = [
+      new Backbone.Model({
+        title: 'title1',
+        content: 'content1'
+      }),
+      new Backbone.Model({
+        title: 'title2',
+        content: 'content2'
+      })
+    ];
+
+    //Create an event listener
+    var eventAggregator = _.extend({}, Backbone.Events);
+
+    //Generates the overall view
+    var ContentsView = Backbone.View.extend({
+      tagname: 'ul',
+      render: function() {
+        _(this.collection).each(function(document) {
+          this.$el.append(new DocumentListView({model: document}).render().el);
+        }, this);
+        return this;
+      }
+    });
+
+    //Generates a list of an item in document
+    var DocumentListView = Backbone.View.extend({
+      tagname: 'li',
+      events: {
+        'click': function() {
+          eventAggregator.trigger('document:selected', this.model);
+        }
+      },
+
+      render: function() {
+        this.$el.html(this.model.get('title'));
+        return this;
+      }
+    });
+
+    //Create a view of the selected option.
+    var DocumentView = Backbone.View.extend({
+      events: {
+        'click #back': function() {
+          eventAggregator.trigger('document:home');
+        }
+      },
+      render: function() {  
+        this.$el.append('<h1>'+ this.model.get('title') + '</h1>');
+        this.$el.append('<div>' + this.model.get('content') + '<div>');
+        this.$el.append('<div><input type="button" value="Back" id="back"/><div>');
+        return this;
+      }
+    });
+
+    //Create a router implementation/handler
+    var DocumentRouter = Backbone.Router.extend({
+      routes: {
+        'contents': 'contents',
+        'view/:title': 'viewDocument'
+      },
+
+      contents: function() {
+        $('body').html(new ContentsView({collection: documents}).render().el);
+      },
+
+      viewDocument: function(title) {
+        var selectedDocument = _(documents).find(function(document) {
+          return document.get('title') === title;
+        });
+
+        $('body').empty().append(new DocumentView({model: selectedDocument}).render().el);
+      }
+    });
+
+    //Listen when a title is clicked
+    eventAggregator.on('document:selected', function(document) {
+      var urlPath = 'view/' + document.get('title');
+      router.navigate(urlPath, {trigger: true});
+    });
+
+    //Listen when go home action is fired
+    eventAggregator.on('document:home', function(document) {
+      router.navigate('contents', {trigger: true});
+    });
+
+    var router = new DocumentRouter();
+    Backbone.history.start();
+
+    router.navigate('contents', {trigger: true});
+  </script>
+</html>
