@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Sample</title>
+    <!--<link rel="stylesheet" href="style.css">-->
+    <script type="text/javascript" src="libs/jquery-1.7.1.js"></script>
+    <script type="text/javascript" src="libs/underscore.js"></script>
+    <script type="text/javascript" src="libs/backbone.js"></script>
+    <style type="text/css">
+    	
+    </style>
+  </head>
+  <body>
+  
+  </body>
+   <script type="text/javascript">
+    var Vehicle = Backbone.Model.extend({});
+
+    var Vehicles = Backbone.Collection.extend({
+      model: Vehicle,
+    /*  comparator: function(vehicle) {
+        return vehicle.get('sequence');
+      }*/
+      comparator: function(vehicle1, vehicle2) {
+        return vehicle1.get('sequence') < vehicle2.get('sequence') ? -1 : 1;
+      }
+    },
+    {
+      oneVehicle: function() {
+        return new Vehicle({color: 'green'});
+      }
+    });
+
+    var vehicles = new Vehicles([
+      {color: 'blue', sequence: 1}, {color: 'red', sequence: 0}
+    ]);
+
+    vehicles.on('change', function(model, options) {
+      console.log(JSON.stringify(model) + ' changed');
+    });
+
+    vehicles.on('change:color', function(model, options) {
+      console.log(JSON.stringify(model) + ' changed color');
+    });
+
+    vehicles.at(0).set('color', 'pink');
+
+    console.log(JSON.stringify(vehicles.at(1)));
+    var newVehicle = Vehicles.oneVehicle();
+    console.log(JSON.stringify(newVehicle));
+  </script>
+</html>
