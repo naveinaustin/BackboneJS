@@ -12,3 +12,4 @@ Some examples are:
 - Events in views
 - View changes due to model change 
 - Route example
+- Use of collections
